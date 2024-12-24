@@ -1,0 +1,2174 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Booke Whitepaper</title>
+	<style>
+		/* Swiss Design Inspired Styles */
+		html {
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+
+		* {
+			box-sizing: border-box;
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			line-height: 1.6;
+			background: #ffffff;
+			color: #222222;
+		}
+
+		@media only screen {
+			body {
+				margin: 0 auto;
+				max-width: 1000px;
+			}
+		}
+
+		/* Grid System */
+		body {
+			background-image: linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+			background-size: 32px 32px;
+			background-color: #fafafa;
+		}
+
+		.page-body {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 6rem;
+			background: white;
+			padding: min(6rem, 8vw);
+			box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+			border-radius: 3px;
+			margin: 0 auto 4rem;
+			max-width: 1200px;
+		}
+
+		header {
+			text-align: center;
+			margin-bottom: 8rem;
+			padding: 6rem 2rem;
+			background: linear-gradient(to bottom, rgba(0, 102, 204, 0.03), transparent);
+			border-bottom: 1px solid rgba(0, 102, 204, 0.1);
+		}
+
+		/* Table of Contents */
+		.table-of-contents {
+			padding: 1.5em;
+			margin: 1em 0;
+			border-radius: 4px;
+			background-color: #fefefe;
+		}
+
+		.table-of-contents h2 {
+			font-size: 1.4em;
+			margin-top: 0;
+		}
+
+		.table-of-contents a {
+			display: block;
+			padding: 0.3em;
+			margin-bottom: 0.2em;
+			border-left: 3px solid transparent;
+			transition: border-left 0.3s ease;
+			color: #333;
+			/* Readable text color */
+			text-decoration: none;
+		}
+
+		.table-of-contents a:hover {
+			border-left-color: #000000;
+			color: #2c3e50;
+			/* Darker text color */
+		}
+
+		.table-of-contents a[data-level="1"] {
+			margin-left: 0.5em;
+		}
+
+		.table-of-contents a[data-level="2"] {
+			margin-left: 1.5em;
+		}
+
+		.table-of-contents a[data-level="3"] {
+			margin-left: 2.5em;
+		}
+
+		/* Typography */
+		a,
+		a.visited {
+			color: #4d46dc;
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
+			transition: border-color 0.2s;
+		}
+
+		a:hover {
+			border-bottom-color: #4d46dc;
+		}
+
+		h1,
+		h2,
+		h3 {
+			line-height: 1.2;
+			font-weight: 500;
+			letter-spacing: -0.02em;
+			margin: 0;
+		}
+
+		.page-title {
+			font-size: clamp(3rem, 8vw, 4.5rem);
+			font-weight: 700;
+			margin-bottom: 2rem;
+			color: #000000;
+			letter-spacing: -0.03em;
+			line-height: 1.1;
+			position: relative;
+			display: inline-block;
+		}
+
+		.page-title::after {
+			content: "";
+			position: absolute;
+			bottom: -1rem;
+			left: 25%;
+			width: 50%;
+			height: 4px;
+			background: #4d46dc;
+			border-radius: 2px;
+		}
+
+		.page-description {
+			font-size: 1.25rem;
+			color: #666;
+			max-width: 60ch;
+			margin: 0 auto;
+		}
+
+		h2 {
+			font-size: 2.25rem;
+			margin-top: 6rem;
+			margin-bottom: 3rem;
+			color: #000000;
+			border-bottom: 3px solid #4d46dc;
+			padding-bottom: 1rem;
+			display: inline-block;
+			letter-spacing: -0.02em;
+			font-weight: 600;
+		}
+
+		h3 {
+			font-size: 1.5rem;
+			margin-top: 2rem;
+			margin-bottom: 1rem;
+			color: #000000;
+		}
+
+		p {
+			font-size: 1.125rem;
+			line-height: 1.7;
+			margin: 0 0 1.5rem 0;
+			max-width: 70ch;
+		}
+
+		/* Lists */
+		ul,
+		ol {
+			padding-left: 2rem;
+			margin: 0 0 2rem 0;
+			max-width: 70ch;
+		}
+
+		ul:not(.bulleted-list)>li,
+		ol>li {
+			margin-bottom: 1rem;
+		}
+
+		ul.bulleted-list {
+			list-style-type: none;
+			padding-left: 0;
+		}
+
+		ul.bulleted-list li {
+			position: relative;
+			padding-left: 1.5rem;
+			margin-bottom: 0.75rem;
+		}
+
+		ul.bulleted-list li::before {
+			content: "•";
+			position: absolute;
+			left: 0;
+			color: #4d46dc;
+		}
+
+		/* Code */
+		code {
+			font-family: "SF Mono", Consolas, Monaco, monospace;
+			background: #f5f5f5;
+			padding: 0.2em 0.4em;
+			border-radius: 3px;
+			font-size: 0.9em;
+			color: #d44;
+		}
+
+		/* Strong and Emphasis */
+		strong {
+			font-weight: 600;
+			color: #000000;
+		}
+
+		em {
+			font-style: italic;
+			color: #444444;
+		}
+
+		/* Blockquotes */
+		blockquote {
+			margin: 2rem 0;
+			padding-left: 2rem;
+			border-left: 4px solid #4d46dc;
+			font-size: 1.25rem;
+			color: #444444;
+			max-width: 65ch;
+		}
+
+		.table_of_contents-item {
+			display: block;
+			font-size: 0.875rem;
+			line-height: 1.3;
+			padding: 0.125rem;
+		}
+
+		.table_of_contents-indent-1 {
+			margin-left: 1.5rem;
+		}
+
+		.table_of_contents-indent-2 {
+			margin-left: 3rem;
+		}
+
+		.table_of_contents-indent-3 {
+			margin-left: 4.5rem;
+		}
+
+		.table_of_contents-link {
+			text-decoration: none;
+			opacity: 0.7;
+			border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+		}
+
+		/* Tables */
+		table {
+			width: 100%;
+			margin: 2rem 0;
+			border-collapse: collapse;
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		th,
+		td {
+			padding: 1rem;
+			text-align: left;
+			border-bottom: 1px solid #e0e0e0;
+			transition: background-color 0.2s;
+		}
+
+		th {
+			font-weight: 500;
+			color: #000000;
+			background-color: #f5f5f5;
+			border-bottom: 2px solid #4d46dc;
+		}
+
+		tr:hover td {
+			background-color: #f8f8f8;
+		}
+
+		td {
+			color: #333333;
+		}
+
+		ol,
+		ul {
+			margin: 0;
+			margin-block-start: 0.6em;
+			margin-block-end: 0.6em;
+		}
+
+		li>ol:first-child,
+		li>ul:first-child {
+			margin-block-start: 0.6em;
+		}
+
+		ul>li {
+			list-style: disc;
+		}
+
+		ul.to-do-list {
+			padding-inline-start: 0;
+		}
+
+		ul.to-do-list>li {
+			list-style: none;
+		}
+
+		.to-do-children-checked {
+			text-decoration: line-through;
+			opacity: 0.375;
+		}
+
+		ul.toggle>li {
+			list-style: none;
+		}
+
+		ul {
+			padding-inline-start: 1.7em;
+		}
+
+		ul>li {
+			padding-left: 0.1em;
+		}
+
+		ol {
+			padding-inline-start: 1.6em;
+		}
+
+		ol>li {
+			padding-left: 0.2em;
+		}
+
+		.mono ol {
+			padding-inline-start: 2em;
+		}
+
+		.mono ol>li {
+			text-indent: -0.4em;
+		}
+
+		.toggle {
+			padding-inline-start: 0em;
+			list-style-type: none;
+		}
+
+		/* Indent toggle children */
+		.toggle>li>details {
+			padding-left: 1.7em;
+		}
+
+		.toggle>li>details>summary {
+			margin-left: -1.1em;
+		}
+
+		.selected-value {
+			display: inline-block;
+			padding: 0 0.5em;
+			background: rgba(206, 205, 202, 0.5);
+			border-radius: 3px;
+			margin-right: 0.5em;
+			margin-top: 0.3em;
+			margin-bottom: 0.3em;
+			white-space: nowrap;
+		}
+
+		.collection-title {
+			display: inline-block;
+			margin-right: 1em;
+		}
+
+		.page-description {
+			margin-bottom: 2em;
+		}
+
+		/* Interactive Elements */
+		button,
+		.button {
+			background: #4d46dc;
+			color: white;
+			border: none;
+			padding: 0.75rem 1.5rem;
+			font-size: 1rem;
+			font-weight: 500;
+			cursor: pointer;
+			transition: background-color 0.2s, transform 0.2s;
+		}
+
+		button:hover,
+		.button:hover {
+			background: #0052a3;
+			transform: translateY(-1px);
+		}
+
+		/* Section Spacing */
+		section {
+			margin: 4rem 0;
+			padding: 2rem 0;
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		section:last-child {
+			border-bottom: none;
+		}
+
+		/* Lists Refinements */
+		.bulleted-list {
+			margin-left: 0;
+			padding-left: 1.5rem;
+		}
+
+		.bulleted-list li {
+			margin-bottom: 1rem;
+			position: relative;
+		}
+
+		.bulleted-list li::before {
+			content: "•";
+			color: #4d46dc;
+			position: absolute;
+			left: -1.5rem;
+			top: 0;
+		}
+
+		time {
+			opacity: 0.5;
+		}
+
+		.icon {
+			display: inline-block;
+			max-width: 1.2em;
+			max-height: 1.2em;
+			text-decoration: none;
+			vertical-align: text-bottom;
+			margin-right: 0.5em;
+		}
+
+		img.icon {
+			border-radius: 3px;
+		}
+
+		.user-icon {
+			width: 1.5em;
+			height: 1.5em;
+			border-radius: 100%;
+			margin-right: 0.5rem;
+		}
+
+		.user-icon-inner {
+			font-size: 0.8em;
+		}
+
+		.text-icon {
+			border: 1px solid #000;
+			text-align: center;
+		}
+
+		.page-cover-image {
+			display: block;
+			object-fit: cover;
+			width: 100%;
+			max-height: 30vh;
+		}
+
+		.page-header-icon {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+
+		.page-header-icon-with-cover {
+			margin-top: -0.72em;
+			margin-left: 0.07em;
+		}
+
+		.page-header-icon img {
+			border-radius: 3px;
+		}
+
+		.link-to-page {
+			margin: 1em 0;
+			padding: 0;
+			border: none;
+			font-weight: 500;
+		}
+
+		p>.user {
+			opacity: 0.5;
+		}
+
+		td>.user,
+		td>time {
+			white-space: nowrap;
+		}
+
+		input[type="checkbox"] {
+			transform: scale(1.5);
+			margin-right: 0.6em;
+			vertical-align: middle;
+		}
+
+		p {
+			margin-top: 0.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.image {
+			border: none;
+			margin: 1.5em 0;
+			padding: 0;
+			border-radius: 0;
+			text-align: center;
+		}
+
+		.code,
+		code {
+			background: rgba(135, 131, 120, 0.15);
+			border-radius: 3px;
+			padding: 0.2em 0.4em;
+			border-radius: 3px;
+			font-size: 85%;
+			tab-size: 2;
+		}
+
+		code {
+			color: #eb5757;
+		}
+
+		.code {
+			padding: 1.5em 1em;
+		}
+
+		.code-wrap {
+			white-space: pre-wrap;
+			word-break: break-all;
+		}
+
+		.code>code {
+			background: none;
+			padding: 0;
+			font-size: 100%;
+			color: inherit;
+		}
+
+		blockquote {
+			font-size: 1.25em;
+			margin: 1em 0;
+			padding-left: 1em;
+			border-left: 3px solid rgb(55, 53, 47);
+		}
+
+		.bookmark {
+			text-decoration: none;
+			max-height: 8em;
+			padding: 0;
+			display: flex;
+			width: 100%;
+			align-items: stretch;
+		}
+
+		.bookmark-title {
+			font-size: 0.85em;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			height: 1.75em;
+			white-space: nowrap;
+		}
+
+		.bookmark-text {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.bookmark-info {
+			flex: 4 1 180px;
+			padding: 12px 14px 14px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.bookmark-image {
+			width: 33%;
+			flex: 1 1 180px;
+			display: block;
+			position: relative;
+			object-fit: cover;
+			border-radius: 1px;
+		}
+
+		.bookmark-description {
+			color: rgba(55, 53, 47, 0.6);
+			font-size: 0.75em;
+			overflow: hidden;
+			max-height: 4.5em;
+			word-break: break-word;
+		}
+
+		.bookmark-href {
+			font-size: 0.75em;
+			margin-top: 0.25em;
+		}
+
+		.sans {
+			font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+		}
+
+		.code {
+			font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
+		}
+
+		.serif {
+			font-family: Lyon-Text, Georgia, ui-serif, serif;
+		}
+
+		.mono {
+			font-family: iawriter-mono, Nitti, Menlo, Courier, monospace;
+		}
+
+		.pdf .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .sans {
+			font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR';
+		}
+
+		.pdf .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .code {
+			font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
+		}
+
+		.pdf .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .serif {
+			font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR';
+		}
+
+		.pdf .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP';
+		}
+
+		.pdf:lang(zh-CN) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC';
+		}
+
+		.pdf:lang(zh-TW) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC';
+		}
+
+		.pdf:lang(ko-KR) .mono {
+			font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR';
+		}
+
+	</style>
+</head>
+
+<body>
+	<article id="15f621af-85b9-808a-ac95-c04225e2a24b" class="page sans">
+		<header>
+			<h1 class="page-title">Booke Whitepaper</h1>
+			<p class="page-description"></p>
+		</header>
+		<div class="page-body">
+			<div class="table-of-contents">
+				<h2>Table of Contents</h2>
+				<a href="#15f621af-85b9-8060-81da-f4a5441966fd" data-level="1">Introduction</a>
+				<a href="#160621af-85b9-80e2-ae7f-fa24be965761" data-level="1">II. Booke Architecture and Technical
+					Overview</a>
+				<a href="#160621af-85b9-8043-82b2-f28d1136bfdf" data-level="2">A. Internet Computer as the
+					Foundation</a>
+				<a href="#160621af-85b9-80bb-8067-f77e5a65f0a3" data-level="2">B. ORIGYN sNFTs for Books</a>
+				<a href="#160621af-85b9-80a6-b8a6-c74dc5b47238" data-level="2">C. Decentralized Book Catalog</a>
+				<a href="#160621af-85b9-8079-8a2e-dd900943c405" data-level="2">D. Print-on-Demand (POD) Integration</a>
+				<a href="#160621af-85b9-8074-bf66-fa9b489b8d83" data-level="2">E. Decentralized Storage</a>
+				<a href="#160621af-85b9-8010-9daa-d51b1db47985" data-level="2">F. Identity and Access Management</a>
+				<a href="#160621af-85b9-8032-9b4a-f648fbb6c873" data-level="1">III. The Booke sNFT</a>
+				<a href="#160621af-85b9-8066-b98f-ef6e6e8a5bed" data-level="2">A. Structure and Metadata</a>
+				<a href="#160621af-85b9-8027-a820-cf27283df1ee" data-level="2">B. AI-Generated Supplement</a>
+				<a href="#160621af-85b9-807b-a1b0-c6986569767f" data-level="2">C. Content Creation and Upload
+					Process</a>
+				<a href="#160621af-85b9-80f2-af6b-c64ac3e1f3f2" data-level="2">D. Version Control and Updates</a>
+				<a href="#160621af-85b9-8008-9a4b-c50d72762984" data-level="2">E. Provenance and Authenticity</a>
+				<a href="#160621af-85b9-8026-a4fc-f55b65f49459" data-level="1">IV. The Booke Ecosystem</a>
+				<a href="#160621af-85b9-809c-b2f9-c41ffb69fa6b" data-level="2">A. Decentralized Marketplace</a>
+				<a href="#160621af-85b9-800c-8d7b-ee9a3ef1b57d" data-level="2">B. Community Governance</a>
+				<a href="#160621af-85b9-8041-af4c-d2625d0dbfb0" data-level="2">C. Incentive Mechanisms</a>
+				<a href="#160621af-85b9-80db-bfc1-e04754edd474" data-level="2">D. BOOKE Token Utility</a>
+				<a href="#160621af-85b9-803d-84fa-e1ef6782bb9a" data-level="2">E. Ecosystem Participants and their
+					Roles</a>
+				<a href="#160621af-85b9-8012-9265-e1323de8cf24" data-level="1">V. Benefits and Value Propositions</a>
+				<a href="#160621af-85b9-80d8-b611-e73aa0bdb184" data-level="2">A. For Authors</a>
+				<a href="#160621af-85b9-80b5-b557-e8a448ee132b" data-level="2">B. For Publishers</a>
+				<a href="#160621af-85b9-8090-87f8-c35e32e70d84" data-level="2">C. For Bookstores</a>
+				<a href="#160621af-85b9-8086-b3db-ea7a76062c1a" data-level="2">D. For Readers</a>
+				<a href="#160621af-85b9-8032-891c-e4e15197de3b" data-level="2">E. For Print-on-Demand Providers</a>
+				<a href="#160621af-85b9-808d-9b80-da84ddeb5b6b" data-level="1">VI. Use Cases and Examples</a>
+				<a href="#161621af-85b9-800f-9785-cb7aca217f0a" data-level="2">A. Local Book Clubs and Communities</a>
+				<a href="#161621af-85b9-805c-9e6b-d5abe194c03c" data-level="2">B. Subscription and Premium Content</a>
+				<a href="#161621af-85b9-80e2-b73c-e5125acd93ec" data-level="2">C. Self-Publishing</a>
+				<a href="#161621af-85b9-809d-85e7-e9d0b7c6d6ca" data-level="2">D. Niche and Specialized Content</a>
+				<a href="#161621af-85b9-8096-bbe6-f2de977a470a" data-level="2">E. Educational Resources</a>
+				<a href="#161621af-85b9-802b-ac96-e6bab8e3ed94" data-level="2">F. Academic Publishing</a>
+				<a href="#160621af-85b9-80e2-8ead-ef1763e936ca" data-level="2">G. Interactive Storytelling & Game
+					Books</a>
+				<a href="#160621af-85b9-80b3-af79-c7c7342d63ee" data-level="1">VIII. Conclusion</a>
+				<a href="#160621af-85b9-801c-a445-c65bac36030b" data-level="1">IX. Appendix</a>
+				<a href="#160621af-85b9-8008-a6b9-d71f44802311" data-level="2">A. Technical Specifications</a>
+				<a href="#160621af-85b9-8084-850e-c0d20c61f936" data-level="2">B. Team Information</a>
+				<a href="#160621af-85b9-80c3-a1e1-f101bf8e7151" data-level="2">C. Tokenomics Details:</a>
+				<a href="#160621af-85b9-80d1-809f-e9f3a5fba116" data-level="2">D. Legal and Regulatory
+					Considerations</a>
+				<a href="#160621af-85b9-80fe-814b-e3dacc421596" data-level="2">E. Glossary of Terms</a>
+				<a href="#160621af-85b9-809a-910d-d2bdee29e775" data-level="2">F. References</a>
+			</div>
+			<h2 id="15f621af-85b9-8060-81da-f4a5441966fd" class="">Introduction</h2>
+			<p id="15f621af-85b9-804f-9fca-c6cde538997c" class="">The book industry, a cornerstone of human knowledge
+				and cultural exchange, finds itself at a crossroads. While the digital age has opened new avenues for
+				content creation and distribution, it has also introduced a set of complex challenges for all
+				stakeholders – publishers, bookstores, authors, and readers alike. Current models are often centralized,
+				inefficient, and riddled with friction, hindering the free flow of literary works and limiting the
+				potential for both creators and consumers.</p>
+			<p id="15f621af-85b9-801c-9eec-cafc2f0c6bca" class=""><strong>Publishers</strong>, despite producing the
+				very heart of the industry, are often squeezed by the discounting practices of a few dominant
+				wholesalers. These intermediaries, while necessary in the current landscape, exert significant control
+				over pricing and distribution, ultimately reducing publishers’ revenue and limiting their ability to
+				invest in new talent and innovative projects. <em>Booke offers publishers a way to regain control over
+					their pricing and distribution, increasing their revenue share and enabling them to connect directly
+					with readers.</em></p>
+			<p id="15f621af-85b9-80d8-a8c6-c02f79a38513" class=""><strong>Bookstores</strong>, the traditional
+				gatekeepers of literary discovery, struggle to compete with the deep discounts offered by online giants
+				like Amazon, which now commands over half the market. This dominance creates an uneven playing field,
+				threatening the survival of independent bookstores and reducing the diversity of available titles in
+				local communities. <em>Booke levels the playing field by enabling bookstores to access a wider range of
+					titles, offer competitive pricing through print-on-demand, and engage with their local communities
+					in new ways.</em></p>
+			<p id="15f621af-85b9-80b0-8df8-f4ba15a3ef07" class=""><strong>Authors</strong>, the creative force behind
+				every book, face an uphill battle to establish direct connections with their readers and effectively
+				monetize their expertise. Traditional publishing models often create barriers between authors and their
+				audience, limiting opportunities for engagement and feedback. The struggle to build a loyal readership
+				and earn a sustainable income discourages aspiring writers and restricts the potential for diverse
+				voices to be heard. <em>Booke empowers authors with direct access to their readers, enabling them to
+					build communities, offer exclusive content, and receive a greater share of royalties.</em></p>
+			<p id="15f621af-85b9-801a-aa02-d627d4f493ed" class=""><strong>Readers</strong>, too, experience significant
+				challenges in navigating the modern literary landscape. The sheer volume of available books can be
+				overwhelming, making it difficult to find relevant titles that match their interests. Moreover, simply
+				reading a book is often insufficient for true knowledge acquisition. Readers desire tools and resources
+				to help them retain information, apply it effectively, and engage more deeply with the material.
+				<em>Booke provides readers with a curated selection of books, enhanced with interactive AI-powered
+					supplements that deepen understanding and engagement. They also benefit from lower prices and
+					greater accessibility to a wider range of titles.</em>
+			</p>
+			<p id="15f621af-85b9-8056-8cf2-cee189c4c3d3" class="">Finally, <strong>printers</strong> gain access to a
+				decentralized, on-demand print network, allowing them to participate in a global market and optimize
+				their printing capacity.</p>
+			<p id="15f621af-85b9-8062-a8d5-f4beab9018e3" class="">Booke emerges as a direct response to these pressing
+				challenges. Built on the secure and scalable Internet Computer blockchain and leveraging the innovative
+				ORIGYN sNFT standard, Booke offers a decentralized, transparent, and efficient ecosystem designed to
+				empower all stakeholders in the book industry. By eliminating intermediaries, fostering direct
+				connections, and integrating cutting-edge technologies, Booke unlocks new possibilities for the
+				creation, distribution, and consumption of literary works. This whitepaper outlines the architecture,
+				functionality, and benefits of the Booke platform, showcasing its potential to revolutionize the book
+				industry and usher in a new era of literary accessibility and empowerment.</p>
+			<h2 id="160621af-85b9-80e2-ae7f-fa24be965761" class="">II. Booke Architecture and Technical Overview</h2>
+			<p id="160621af-85b9-80e7-b2b2-d1b513330051" class="">Booke is designed as a decentralized platform that
+				leverages the unique capabilities of the Internet Computer (IC) and the innovative ORIGYN sNFT standard
+				to create a more efficient, transparent, and equitable book ecosystem. This section details the core
+				technologies and architectural components that underpin the Booke platform.</p>
+			<p id="160621af-85b9-8043-82b2-f28d1136bfdf" class=""><strong>A. Internet Computer as the
+					Foundation</strong></p>
+			<p id="160621af-85b9-8090-bb49-ff097c94e25e" class="">The Internet Computer serves as the foundational layer
+				for Booke, providing the necessary infrastructure for decentralized computation, storage, and
+				networking. Unlike traditional blockchains, the IC offers several key advantages that are crucial for
+				the Booke platform:</p>
+			<ul id="160621af-85b9-8025-94c1-f0a5354eba28" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scalability:</strong> The IC is designed to scale to handle a
+					large number of users and transactions without sacrificing performance. This is crucial for a
+					platform that aims to support a global user base and a growing library of books.</li>
+			</ul>
+			<ul id="160621af-85b9-8079-a321-d82eef782b5a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Cost-Effectiveness:</strong> The IC offers significantly lower
+					transaction and storage costs compared to other blockchain platforms. This enables Booke to offer
+					affordable access to books for readers and maximize revenue for authors and publishers.</li>
+			</ul>
+			<ul id="160621af-85b9-80e0-a41a-caca52b24bbe" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Security:</strong> The IC utilizes advanced cryptography and a
+					decentralized network of nodes to ensure the security and integrity of the platform and its data.
+				</li>
+			</ul>
+			<ul id="160621af-85b9-8071-b915-cbc2390b7b8c" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Direct Storage:</strong> The Internet Computer’s native storage
+					allows for the direct, permanent and efficient storage of large assets like book files, audiobooks
+					and interactive supplements without reliance on external services. This simplifies the architecture,
+					improves security and lowers complexity.</li>
+			</ul>
+			<ul id="160621af-85b9-800a-8398-fe26de64ca05" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>On-Chain Computation:</strong> The IC’s powerful canister
+					architecture enables complex operations and logic to be executed directly on the blockchain. This
+					opens the door to a new range of applications such as AI-powered tools, dynamic content updates and
+					sophisticated royalty management.</li>
+			</ul>
+			<ul id="160621af-85b9-80d4-a8e6-fa233449edc3" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Interoperability:</strong> The Internet Computer’s Chain Key
+					cryptography enables cross-chain interaction with other blockchains, paving the way for
+					interoperability and future growth.</li>
+			</ul>
+			<p id="160621af-85b9-807f-b3c0-de151914699c" class="">These features make the IC an ideal platform for
+				building a decentralized book ecosystem that is scalable, secure, and affordable.</p>
+			<p id="160621af-85b9-80bb-8067-f77e5a65f0a3" class=""><strong>B. ORIGYN sNFTs for Books</strong></p>
+			<p id="160621af-85b9-8069-b45f-cb4f667bdfcd" class="">At the heart of Booke lies the ORIGYN sNFT standard, a
+				powerful and versatile framework for representing digital assets on the blockchain. In the Booke
+				context, each book is represented as a unique ORIGYN sNFT, which encapsulates several key elements:</p>
+			<ul id="160621af-85b9-8037-a13b-f68cb8fc0c66" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Book Content:</strong> The sNFT stores all versions of the book
+					within its on-chain storage capabilities:<ul id="160621af-85b9-80b4-b9f7-c0f9b760c68d"
+						class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Print-Ready PDF:</strong> A high-resolution PDF file
+							optimized for print-on-demand services.</li>
+					</ul>
+					<ul id="160621af-85b9-808b-8c27-dac245b725bb" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>eBook:</strong> A reflowable ebook format (e.g.,
+							EPUB) for reading on various devices.</li>
+					</ul>
+					<ul id="160621af-85b9-8041-a471-fd9cdfc3d1d7" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Audiobook:</strong> An audio version of the book,
+							enabling listeners to enjoy the content.</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-80f1-ba19-f24d5b57b544" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>AI-Generated Supplement:</strong> Booke sNFTs include an
+					AI-powered supplement that extends and enriches the reader’s experience. This can include:<ul
+						id="160621af-85b9-80fe-b0d0-f9d1dbef083b" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Summary:</strong> A concise and comprehensive
+							overview of the book’s content.</li>
+					</ul>
+					<ul id="160621af-85b9-807c-b2df-e176a58e1e53" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Quizzes:</strong> Interactive quizzes to test reader
+							comprehension and reinforce key concepts.</li>
+					</ul>
+					<ul id="160621af-85b9-801a-96e2-daaa48b3fbbf" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>AI Chat:</strong> An AI chatbot that provides instant
+							answers, clarifies concepts, and engages in thoughtful discussion related to the book’s
+							material.</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-80ed-a3c7-cbcb4b7d221f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Metadata:</strong> Comprehensive metadata about the book, such
+					as author, title, ISBN, genre, publication date, and other relevant information.</li>
+			</ul>
+			<ul id="160621af-85b9-80d3-8e94-fa983dbd34f4" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Royalty Information:</strong> Smart contract logic that manages
+					royalty distribution and payments to authors, publishers, and other contributors.</li>
+			</ul>
+			<ul id="160621af-85b9-8007-8d04-dba8c8ca4a1b" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Ownership and Transfer History:</strong> A transparent and
+					immutable record of all ownership changes.</li>
+			</ul>
+			<ul id="160621af-85b9-8035-9930-c624fae23340" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Addressability:</strong> sNFTs have a built-in
+					<code>https://</code> query functionality that allows them to be directly referenced from any web or
+					mobile application as described in the ORIGYN sNFT whitepaper.
+				</li>
+			</ul>
+			<ul id="160621af-85b9-80d9-85f0-d18bc4838380" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Marketable NFTs:</strong> Booke leverages the “marketable NFTs”
+					aspect of ORIGYN sNFTs, allowing the sNFT to act as its own marketplace. This feature enables the
+					NFT itself to facilitate transactions, rewarding its owners directly and removing the need for
+					traditional intermediaries or centralized marketplaces.</li>
+			</ul>
+			<p id="160621af-85b9-806d-a73b-eb51f69fe98e" class=""><strong>C. Decentralized Book Catalog</strong></p>
+			<p id="160621af-85b9-80a6-b8a6-c74dc5b47238" class="">The Booke platform maintains a decentralized book
+				catalog that serves as a registry for all sNFT-based books, effectively eliminating the dependency on
+				centralized wholesalers. This catalog acts as a bridge between all the stakeholders and it is:</p>
+			<ul id="160621af-85b9-8090-8c65-e908eac6bf98" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Immutable and Transparent:</strong> Built using the IC’s secure
+					ledger, ensuring that book listings cannot be tampered with and that all transactions are
+					transparent.</li>
+			</ul>
+			<ul id="160621af-85b9-8050-9491-f329ef732506" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>A Disintermediation Mechanism:</strong> By offering direct
+					connections between authors, publishers, retailers, and print providers, Booke’s decentralized
+					catalog reduces the need for intermediaries, like centralized wholesalers.</li>
+			</ul>
+			<ul id="160621af-85b9-805a-8377-da1e6a26f02d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Searchable and Discoverable:</strong> The catalog allows
+					various stakeholders to easily search for books based on various criteria, such as author, title,
+					genre, keywords, and more.<ul id="160621af-85b9-80ef-8c63-c22392b1cac5" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Publishers</strong> can register their books, manage
+							their listings, and track sales data.</li>
+					</ul>
+					<ul id="160621af-85b9-8082-940b-c9c910b990a6" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Bookstores</strong> can browse the catalog to
+							discover new titles and integrate them into their own inventory.</li>
+					</ul>
+					<ul id="160621af-85b9-806f-b1d7-dbe0a20cb9b6" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>POD Providers</strong> can identify opportunities for
+							printing and fulfillment based on book popularity and geographic location.</li>
+					</ul>
+					<ul id="160621af-85b9-80b7-b47b-ff314457d395" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Distribution Partners</strong> can access the catalog
+							to streamline their logistics operations and build custom solutions.</li>
+					</ul>
+					<ul id="160621af-85b9-80f9-a8f5-e7d1a3ca0cf3" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Developers</strong> can leverage the catalog&#x27;s
+							open APIs to build innovative apps and tools that enhance the book ecosystem.</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-8008-bb3e-ef57bd2ea183" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Filterable and Sortable:</strong> Provides options to filter
+					and sort book listings to refine search results, for example, by rating, popularity, or date of
+					publication.</li>
+			</ul>
+			<ul id="160621af-85b9-8037-ac13-f685dc557e79" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Accessible:</strong> All information about registered books is
+					readily available to all relevant stakeholders through a dedicated interface.</li>
+			</ul>
+			<p id="160621af-85b9-80e2-9213-d8e30cf5f44c" class=""><strong>D. Print-on-Demand (POD) Integration</strong>
+			</p>
+			<p id="160621af-85b9-8079-8a2e-dd900943c405" class="">Booke integrates with a decentralized network of
+				Print-on-Demand providers, empowering authors, publishers, and distribution partners. The platform
+				leverages smart contracts to:</p>
+			<ul id="160621af-85b9-8086-afb3-d3f7642fc93b" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Automate Order Routing:</strong> Direct printing orders to the
+					most efficient and cost-effective POD printer based on location, availability, and capacity,
+					reducing delivery times and costs.</li>
+			</ul>
+			<ul id="160621af-85b9-8088-a750-f8e551af2ecf" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Track Printing Process:</strong> Provide transparency and
+					real-time updates on the printing and shipping of books, creating an auditable supply chain.</li>
+			</ul>
+			<ul id="160621af-85b9-80ae-8cfd-e22fd1f67191" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Manage Payments:</strong> Automatically facilitate payment to
+					POD printers upon successful delivery.</li>
+			</ul>
+			<ul id="160621af-85b9-8085-a4b3-cebc329e4c7d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Empower Distribution Partners</strong>: Distribution partners
+					can access the POD network to build streamlined and tailored delivery operations.</li>
+			</ul>
+			<ul id="160621af-85b9-80df-9a39-dd2e48e34465" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Provide Tools for Developers</strong>: Developers can build
+					apps leveraging this POD network to enhance the Booke platform with custom solutions.</li>
+			</ul>
+			<p id="160621af-85b9-8094-b124-da101d062f71" class=""><strong>E. Decentralized Storage</strong></p>
+			<p id="160621af-85b9-8074-bf66-fa9b489b8d83" class="">All book content (PDF, eBook, Audiobook, AI
+				Supplement) is stored directly on the Internet Computer, taking advantage of its native storage
+				capabilities. This removes the need for reliance on external storage solutions like IPFS, and provides:
+			</p>
+			<ul id="160621af-85b9-8062-9da3-f943debaf78b" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Permanent Storage:</strong> Ensures that book content is stored
+					securely and is permanently accessible.</li>
+			</ul>
+			<ul id="160621af-85b9-8001-80da-cc569da78f1e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>High Availability:</strong> Guarantees that book content is
+					always accessible to readers and stakeholders.</li>
+			</ul>
+			<ul id="160621af-85b9-80d0-b79d-c2072b69ee6e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Cost-Effective Storage:</strong> Significantly reduces storage
+					costs compared to other alternatives, like traditional cloud-based solutions.</li>
+			</ul>
+			<p id="160621af-85b9-8009-aee0-d9c5c28777c0" class=""><strong>F. Identity and Access Management</strong></p>
+			<p id="160621af-85b9-8010-9daa-d51b1db47985" class="">Booke utilizes the Internet Computer&#x27;s
+				decentralized identity (DID) framework for secure and user-centric identity management. This offers
+				significant advantages over traditional email-based solutions:</p>
+			<ul id="160621af-85b9-8026-9ed4-f2ad4e61facd" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>User-Controlled Identities:</strong> Users have complete
+					control over their personal data and identities. This contrasts with traditional email systems where
+					data is controlled by centralized providers.</li>
+			</ul>
+			<ul id="160621af-85b9-8099-a855-d817680b2969" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Enhanced Security:</strong> DIDs leverage cryptographic keys
+					and are significantly more secure than password-based systems, reducing the risk of account hacking
+					and data breaches.</li>
+			</ul>
+			<ul id="160621af-85b9-8034-b228-dfcbaa4a4e4e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Privacy Preservation:</strong> Users can choose what
+					information they share and do not need to disclose their personal data to the platform.</li>
+			</ul>
+			<ul id="160621af-85b9-8081-a866-cfea7ae232d7" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Seamless Access:</strong> DID offers a seamless login
+					experience without relying on email verification codes, streamlining user onboarding and access to
+					the platform.</li>
+			</ul>
+			<p id="160621af-85b9-8029-bdd5-ef1a2cfb0b02" class="">This comprehensive architecture, built upon the
+				strengths of the Internet Computer and ORIGYN sNFT, sets the stage for a revolutionary book ecosystem
+				that empowers all participants and disrupts the conventional centralized model.</p>
+			<h2 id="160621af-85b9-8032-9b4a-f648fbb6c873" class="">III. The Booke sNFT</h2>
+			<p id="160621af-85b9-8083-aaab-c55c71b94288" class="">The Booke sNFT (Sovereign Non-Fungible Token) is the
+				core building block of the Booke platform. It is more than just a digital representation of a book;
+				it&#x27;s a self-contained, programmable object that encapsulates the book&#x27;s content, metadata,
+				ownership, and functionalities. This section details the various facets of the Booke sNFT.</p>
+			<p id="160621af-85b9-8066-b98f-ef6e6e8a5bed" class=""><strong>A. Structure and Metadata</strong></p>
+			<p id="160621af-85b9-808e-acf7-da9692f6db58" class="">The Booke sNFT is meticulously structured to ensure
+				its versatility and utility. It encompasses the following key elements:</p>
+			<ul id="160621af-85b9-8043-923c-dd77f4e06a25" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Content Container:</strong> This section holds all digital
+					representations of the book, seamlessly interconnected to enhance the user experience:<ul
+						id="160621af-85b9-801f-8ae1-da056c7b9f88" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Print-Ready PDF:</strong> A high-resolution,
+							print-optimized PDF file. This is primarily used by Print-on-Demand (POD) providers to
+							create physical copies of the book.</li>
+					</ul>
+					<ul id="160621af-85b9-8066-9a9e-d2c200806aba" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>eBook (EPUB):</strong> A reflowable, accessible eBook
+							file. This format allows readers to enjoy the book on various devices and platforms, with
+							adjustable font sizes and layout for a comfortable reading experience.</li>
+					</ul>
+					<ul id="160621af-85b9-8020-868c-fc35dc71c9e5" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Audiobook:</strong> An audio version of the book,
+							designed for listening on various devices. This file can be streamed or downloaded for
+							offline listening.</li>
+					</ul>
+					<ul id="160621af-85b9-8090-b990-db3f6ba301df" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Synchronization Feature:</strong> The sNFT records
+							the user’s progress within each format, allowing the reader to seamlessly resume reading or
+							listening right where they left off, even when switching between the eBook and audiobook
+							formats.</li>
+					</ul>
+					<ul id="160621af-85b9-80a2-9974-ece7551dff12" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>AI-Generated Supplement:</strong> A dynamically
+							generated supplement that provides the following interactive features:<ul
+								id="160621af-85b9-8047-8382-c24022af6d16" class="bulleted-list">
+								<li style="list-style-type:square"><strong>Summary:</strong> A concise summary of the
+									book&#x27;s key points, useful for quick reviews or refreshing memories.</li>
+							</ul>
+							<ul id="160621af-85b9-8019-b0c0-e52c88d05f46" class="bulleted-list">
+								<li style="list-style-type:square"><strong>Quizzes:</strong> Interactive quizzes that
+									test the reader&#x27;s understanding of the book&#x27;s content, fostering
+									engagement and knowledge retention.</li>
+							</ul>
+							<ul id="160621af-85b9-80c7-87d4-fbe84ca6e9e0" class="bulleted-list">
+								<li style="list-style-type:square"><strong>AI Chat:</strong> An AI-powered chatbot that
+									enables readers to ask questions, clarify concepts, and engage in deeper discussions
+									about the book&#x27;s themes and ideas.</li>
+							</ul>
+							<ul id="160621af-85b9-801a-b289-ef74f05dd80b" class="bulleted-list">
+								<li style="list-style-type:square"><strong>Author Verification:</strong> Authors have
+									the option to verify and certify the AI-generated content, ensuring its accuracy and
+									alignment with their intent.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-80b5-98b9-c106997598b7" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Metadata:</strong> Comprehensive and standardized metadata is
+					crucial for discoverability, proper cataloging, and building community around the book. The Booke
+					sNFT includes the following metadata fields:<ul id="160621af-85b9-80e6-a3ab-e6e41dfd19f3"
+						class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Basic Information:</strong> Author(s), Title,
+							Subtitle, Edition, Publisher, ISBN (International Standard Book Number)</li>
+					</ul>
+					<ul id="160621af-85b9-805f-b4aa-d8b848742bc6" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Descriptive Information:</strong> Genre(s), Keywords,
+							Abstract/Synopsis, Language, Table of Contents (structured format)</li>
+					</ul>
+					<ul id="160621af-85b9-80d8-8cc7-e70c4f76fcac" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Publication Details:</strong> Publication Date,
+							Copyright Information</li>
+					</ul>
+					<ul id="160621af-85b9-80df-ab6b-db86c5e30482" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Contributor Information:</strong> List of
+							contributors, such as translators, editors, cover artists, etc.</li>
+					</ul>
+					<ul id="160621af-85b9-804d-b3bb-f4ae885516e0" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Content Licensing:</strong> Licensing terms,
+							permissions, usage restrictions</li>
+					</ul>
+					<ul id="160621af-85b9-80e4-9f58-c85d8e13e972" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Rating and Review Data:</strong> Aggregated reader
+							ratings and reviews</li>
+					</ul>
+					<ul id="160621af-85b9-80c7-bff3-e6bf8855fac1" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Bookstore Curators:</strong> A dynamic list of
+							bookstores that actively curate the given book<strong>,</strong> and participate in the
+							revenue sharing based on the purchaser&#x27;s choice or geographic location.</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-8026-860c-cfd153daafca" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Smart Contract Logic:</strong> The Booke sNFT contains embedded
+					smart contract logic to:<ul id="160621af-85b9-8013-a89b-e9aec72e7714" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Manage Ownership:</strong> Track and manage the
+							ownership of the sNFT.</li>
+					</ul>
+					<ul id="160621af-85b9-8068-89d6-cbbdac6e23cf" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Facilitate Transactions:</strong> Enable the direct
+							buying and selling of the sNFT, both for individual copies and secondary marketplace
+							interactions.</li>
+					</ul>
+					<ul id="160621af-85b9-8008-9449-e7cca55afdf7" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Distribute Royalties:</strong> Automatically
+							distribute royalty payments to authors, publishers, bookstores, and other contributors based
+							on pre-defined rules.</li>
+					</ul>
+					<ul id="160621af-85b9-8060-a672-c2a9f3c074be" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Manage Access:</strong> Govern access to the
+							different content types based on ownership or purchase details, such as allowing access to
+							the ebook or audiobook for the purchaser, while allowing access to the PDF only for
+							distribution partners.</li>
+					</ul>
+					<ul id="160621af-85b9-80e8-9f8e-c65c64d490be" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Provide Event Access:</strong> Smart contracts allow
+							the sNFT to act like a ticket granting access to local and online events and loyalty
+							programs offered by bookstores that curate the given book, fostering community engagement
+							and local literary scenes.</li>
+					</ul>
+					<ul id="160621af-85b9-80a3-9a56-c286dd3277b0" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Enable Author Interactions:</strong> The smart
+							contracts enable access to authors&#x27; online office hours and Q&amp;A sessions, providing
+							readers with direct interaction opportunities.</li>
+					</ul>
+					<ul id="160621af-85b9-80ab-ac49-c187e1a7e71b" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Marketable NFT Functionality:</strong> The sNFT
+							leverages the "marketable NFT" aspect of ORIGYN, allowing the NFT to itself act as
+							its own marketplace. This functionality enables the NFT to facilitate transactions, and
+							rewarding its owners directly and removing the need for traditional intermediaries.</li>
+					</ul>
+					<ul id="160621af-85b9-8075-9c88-ed72cc3e97ef" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Enforce Governance:</strong> Support the sNFT’s
+							governance by utilizing a DAO structure, allowing for community-driven decision making.</li>
+					</ul>
+				</li>
+			</ul>
+			<p id="160621af-85b9-80f4-89e6-f08b7ff46d10" class=""><strong>B. AI-Generated Supplement</strong></p>
+			<p id="160621af-85b9-8027-a820-cf27283df1ee" class="">The AI-powered supplement is a core differentiator for
+				Booke sNFTs. It provides a dynamic and personalized learning experience for readers.</p>
+			<ul id="160621af-85b9-8079-8c5f-e86c774b17e0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Dynamic Content:</strong> The supplement is not a static file.
+					It can be dynamically updated and enhanced over time, ensuring that it remains relevant and
+					engaging.</li>
+			</ul>
+			<ul id="160621af-85b9-808e-8cfa-c2f9016fc2db" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Personalized Learning:</strong> The summary, quizzes, and AI
+					chat can be customized based on the reader&#x27;s individual interactions and progress.</li>
+			</ul>
+			<ul id="160621af-85b9-8022-8f91-cb281cab2556" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Improved Comprehension:</strong> The supplement helps readers
+					better understand the book&#x27;s content, retain information, and apply it more effectively.</li>
+			</ul>
+			<ul id="160621af-85b9-80b2-a0c0-cc86704e921a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Continuous Support:</strong> The AI chat provides ongoing
+					assistance to readers, answering their questions and clarifying doubts.</li>
+			</ul>
+			<ul id="160621af-85b9-80d7-8a77-f1e7646c3c1e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Author Verified:</strong> Authors have the power to verify and
+					certify their AI-generated content, making sure it is an authentic representation of their work.
+				</li>
+			</ul>
+			<p id="160621af-85b9-8026-a29d-d209603e3b48" class=""><strong>C. Content Creation and Upload
+					Process</strong></p>
+			<p id="160621af-85b9-807b-a1b0-c6986569767f" class="">Booke provides a user-friendly and intuitive interface
+				for authors and publishers to create and upload their book content. The process is designed to be
+				simple, seamless, and requires <strong>no technical knowledge:</strong></p>
+			<ol type="1" id="160621af-85b9-80a3-bb13-e0ce27619e39" class="numbered-list" start="1">
+				<li><strong>Content Preparation:</strong> Authors and publishers prepare the necessary files, starting
+					with a print-ready PDF. The platform will then automatically generate the eBook and Audiobook
+					formats utilizing AI. Authors and publishers can then verify or replace these AI-generated versions
+					with their own if they prefer.</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80e8-afec-df5d8309b650" class="numbered-list" start="2">
+				<li><strong>Metadata Entry:</strong> Authors and publishers provide relevant metadata about the book,
+					ensuring that it can be easily discovered and categorized.</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80da-a90e-c8e59570880d" class="numbered-list" start="3">
+				<li><strong>Smart Contract Configuration:</strong> Authors and publishers configure the smart contract
+					logic that governs the ownership, access, and royalty distribution.</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80df-9210-cac53030c053" class="numbered-list" start="4">
+				<li><strong>Content Upload:</strong> Authors and publishers upload their content to the Internet
+					Computer.</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80d3-91de-d9f3cccb7a56" class="numbered-list" start="5">
+				<li><strong>sNFT Creation:</strong> The system creates the Booke sNFT, packaging the content, metadata,
+					and smart contract logic into a secure and tamper-proof digital object.</li>
+			</ol>
+			<p id="160621af-85b9-80b7-9535-c549e0464acf" class=""><strong>D. Version Control and Updates</strong></p>
+			<p id="160621af-85b9-80f2-af6b-c64ac3e1f3f2" class="">The Booke platform recognizes that books may need
+				updates and revisions over time. Therefore, it includes robust version control capabilities.</p>
+			<ul id="160621af-85b9-8017-b79a-ea6aa284b1d6" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Immutable History:</strong> The platform maintains an immutable
+					history of all book versions, ensuring complete transparency and provenance.</li>
+			</ul>
+			<ul id="160621af-85b9-807d-b60d-d93584b655f3" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Version Tracking:</strong> The Booke sNFT is able to manage
+					various versions and track the changes in the book’s content over time.</li>
+			</ul>
+			<ul id="160621af-85b9-80e3-88dc-ee2d8cfd6d45" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Controlled Updates:</strong> Authors and publishers control how
+					updates are applied to existing sNFTs, giving them options to manage access or make new versions of
+					the same content with a new sNFT.</li>
+			</ul>
+			<p id="160621af-85b9-808d-9932-f6cefe63d5f9" class=""><strong>E. Provenance and Authenticity</strong></p>
+			<p id="160621af-85b9-8008-9a4b-c50d72762984" class="">The Booke sNFT ensures the provenance and authenticity
+				of books, offering security and traceability to both creators and consumers.</p>
+			<ul id="160621af-85b9-80a6-8141-c381f749fa9e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>On-Chain Provenance:</strong> The sNFT’s transaction history on
+					the Internet Computer is a permanent and transparent record of ownership changes and all
+					interactions, establishing an unchangeable chain of custody.</li>
+			</ul>
+			<ul id="160621af-85b9-8099-92a2-f4bca85f3674" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Authenticity Verification:</strong> Readers can easily verify
+					the authenticity of the book by checking the sNFT’s provenance on the blockchain, thus preventing
+					counterfeiting or fraud.</li>
+			</ul>
+			<ul id="160621af-85b9-80e8-b085-e5255e4482bf" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Immutable Record:</strong> All data, metadata and all the
+					different content formats included in the sNFT cannot be altered after the sNFT is created.</li>
+			</ul>
+			<p id="160621af-85b9-8076-aa9b-cf8f314df920" class="">In summary, the Booke sNFT is a revolutionary tool
+				that not only represents a book but transforms it into a dynamic, interactive, and marketable digital
+				asset. It empowers authors, publishers, bookstores, and readers with unprecedented levels of control,
+				engagement, and transparency, ushering in a new era of literary possibilities.</p>
+			<h2 id="160621af-85b9-8026-a4fc-f55b65f49459" class="">IV. The Booke Ecosystem</h2>
+			<p id="160621af-85b9-8091-ba45-eaf1e8c2e8c4" class="">The Booke platform is more than just a collection of
+				technologies; it is a thriving ecosystem that connects authors, publishers, bookstores, readers, POD
+				providers, and developers. This section details the key components that make up the Booke ecosystem.</p>
+			<p id="160621af-85b9-809c-b2f9-c41ffb69fa6b" class=""><strong>A. Decentralized Marketplace</strong></p>
+			<p id="160621af-85b9-8081-a1c1-d5d11caa7e8d" class="">The Booke platform incorporates a decentralized
+				marketplace built directly into each Booke sNFT, which utilizes the "Marketable NFTs"
+				functionality of ORIGYN sNFTs, and provides a peer-to-peer environment for buying and selling books. Key
+				features include:</p>
+			<ul id="160621af-85b9-80c0-b6f0-cf46ed94eb8c" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Direct Transactions:</strong> The marketplace eliminates the
+					need for intermediaries by facilitating direct transactions between authors, publishers, and
+					readers.</li>
+			</ul>
+			<ul id="160621af-85b9-802b-81b3-ebac3e10840b" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Transparent Pricing:</strong> The marketplace allows authors
+					and publishers to set their own prices, ensuring that they receive a fair share of the revenue.
+					Dynamic pricing options could also be implemented.</li>
+			</ul>
+			<ul id="160621af-85b9-804b-b914-d0d35affc3e4" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Secondary Market:</strong> Users can buy and sell pre-owned
+					Booke sNFTs, creating a vibrant secondary market.</li>
+			</ul>
+			<ul id="160621af-85b9-8018-9f2c-dc9e8adb0694" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Secure Transactions:</strong> Smart contracts on the Internet
+					Computer guarantee secure and transparent transactions.</li>
+			</ul>
+			<ul id="160621af-85b9-8054-b738-cbb5cead92f5" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Global Accessibility:</strong> The marketplace is accessible to
+					users worldwide, creating a global platform for buying and selling books.</li>
+			</ul>
+			<ul id="160621af-85b9-8080-a527-c9df24553463" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Automated Royalty Distribution:</strong> Smart contracts
+					automatically distribute royalties to all stakeholders based on pre-defined rules, ensuring fair
+					compensation for all.</li>
+			</ul>
+			<p id="160621af-85b9-802e-85c6-d1cafceb608f" class=""><strong>B. Community Governance</strong></p>
+			<p id="160621af-85b9-800c-8d7b-ee9a3ef1b57d" class="">The Booke platform is governed by a Decentralized
+				Autonomous Organization (DAO), empowering the community to shape the future of the platform.</p>
+			<ul id="160621af-85b9-80af-907c-e7b4f4db58d0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Token Holders:</strong> BOOKE token holders have the right to
+					vote on key decisions affecting the platform, including upgrades, feature development, and policy
+					changes.</li>
+			</ul>
+			<ul id="160621af-85b9-80a6-8cd3-d7b44caf2eb1" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Transparency and Accountability:</strong> All decisions and
+					actions of the DAO are recorded on the Internet Computer, ensuring transparency and accountability.
+				</li>
+			</ul>
+			<ul id="160621af-85b9-80fe-b6a2-e9985b53401e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Community Participation:</strong> The DAO encourages active
+					participation from authors, publishers, readers, and other stakeholders, fostering a sense of
+					ownership and collaboration.</li>
+			</ul>
+			<ul id="160621af-85b9-806f-aad9-faeca4b39422" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Decentralized Decision-Making:</strong> The DAO ensures that
+					the Booke platform remains decentralized, preventing any single entity from controlling the
+					ecosystem.</li>
+			</ul>
+			<p id="160621af-85b9-8034-b4a2-ff59020ee035" class=""><strong>C. Incentive Mechanisms</strong></p>
+			<p id="160621af-85b9-8041-af4c-d2625d0dbfb0" class="">Booke utilizes a tokenized incentive system to
+				encourage active participation and contribution to the ecosystem.</p>
+			<ul id="160621af-85b9-802f-b3d2-cdb8502dd705" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>BOOKE Token:</strong> The BOOKE token is the native
+					cryptocurrency of the Booke platform. It serves as the primary medium of exchange within the
+					ecosystem and as a governance token within the DAO.</li>
+			</ul>
+			<ul id="160621af-85b9-8079-b2c7-d634478206c1" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Staking Rewards:</strong> BOOKE token holders can earn staking
+					rewards by locking up their tokens and contributing to the security and stability of the network.
+				</li>
+			</ul>
+			<ul id="160621af-85b9-8074-b42a-f1f11bae259c" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Participation Rewards:</strong> Authors, publishers,
+					bookstores, readers, and developers can earn BOOKE tokens for various actions, such as:<ul
+						id="160621af-85b9-8000-8b2a-eab8cf3ab1ab" class="bulleted-list">
+						<li style="list-style-type:circle">Publishing new books</li>
+					</ul>
+					<ul id="160621af-85b9-8055-9d35-e004e4d29a92" class="bulleted-list">
+						<li style="list-style-type:circle">Curating book recommendations</li>
+					</ul>
+					<ul id="160621af-85b9-8065-9ec9-c9ede812461c" class="bulleted-list">
+						<li style="list-style-type:circle">Reviewing books</li>
+					</ul>
+					<ul id="160621af-85b9-80bb-964f-e6d4b05380af" class="bulleted-list">
+						<li style="list-style-type:circle">Providing technical support</li>
+					</ul>
+					<ul id="160621af-85b9-80d1-b062-c07d9edcc988" class="bulleted-list">
+						<li style="list-style-type:circle">Participating in governance decisions</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-804e-aa75-e09704113dec" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Network Growth Incentives:</strong> Early adopters and
+					contributors can be rewarded with BOOKE tokens for helping to grow the network and build a thriving
+					community.</li>
+			</ul>
+			<p id="160621af-85b9-80e9-a8b4-c63e2d2010e0" class=""><strong>D. BOOKE Token Utility</strong></p>
+			<p id="160621af-85b9-80db-bfc1-e04754edd474" class="">The BOOKE token serves multiple purposes within the
+				Booke ecosystem:</p>
+			<ul id="160621af-85b9-8018-9fd1-e8ccfca20c35" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Payment Currency:</strong> The BOOKE token is used for all
+					transactions within the platform, such as purchasing books, accessing premium features, and paying
+					for printing services.</li>
+			</ul>
+			<ul id="160621af-85b9-80f7-a933-c22c1753689f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Governance Rights:</strong> BOOKE token holders have the right
+					to vote on key decisions affecting the Booke platform.</li>
+			</ul>
+			<ul id="160621af-85b9-8067-8ac0-c745a33951e6" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Incentive Rewards:</strong> BOOKE tokens are used to reward
+					active participants and contributors to the ecosystem.</li>
+			</ul>
+			<ul id="160621af-85b9-80d0-b8b2-f1d4f364d674" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Access to Premium Features:</strong> BOOKE tokens provide
+					access to premium features on the platform.</li>
+			</ul>
+			<ul id="160621af-85b9-8036-8a05-f129817f0570" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Staking for Rewards:</strong> Users can stake their BOOKE
+					tokens to earn more tokens.</li>
+			</ul>
+			<ul id="160621af-85b9-80d3-a22b-c65f3a340712" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Community Grants:</strong> The Booke DAO can vote to allocate
+					BOOKE tokens to support community projects and initiatives.</li>
+			</ul>
+			<p id="160621af-85b9-800c-8d17-f2b79daba273" class=""><strong>E. Ecosystem Participants and their
+					Roles</strong></p>
+			<p id="160621af-85b9-803d-84fa-e1ef6782bb9a" class="">The Booke ecosystem thrives on the collaboration and
+				contributions of different participants:</p>
+			<ul id="160621af-85b9-8034-bbe3-f4986cf704df" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Authors:</strong> Create and publish original literary works,
+					engage directly with readers, and receive a fair share of the revenue.</li>
+			</ul>
+			<ul id="160621af-85b9-8019-b7c0-f4141fb491a9" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Publishers:</strong> Curate, edit, and format books, and
+					leverage Booke’s publishing tools to streamline the production process and optimize their revenue
+					streams.</li>
+			</ul>
+			<ul id="160621af-85b9-804b-b182-fc92c6e3b7fd" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Bookstores:</strong> Curate book selections, engage with their
+					local communities, and earn a revenue share for books purchased based on their recommendation and
+					location.</li>
+			</ul>
+			<ul id="160621af-85b9-802b-9dfe-ec73b3e0dcf2" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Readers:</strong> Discover and purchase books, engage with the
+					AI-powered supplements, and participate in the community by rating and reviewing books.</li>
+			</ul>
+			<ul id="160621af-85b9-8021-9802-cb0da010fdde" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Print-on-Demand Providers:</strong> Offer printing services and
+					fulfill orders for physical books, participating in the global network and optimizing their printing
+					capacity.</li>
+			</ul>
+			<ul id="160621af-85b9-807b-9c9b-fd294db2a8f4" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Distribution Partners:</strong> Streamline delivery operations,
+					enabling efficient and cost-effective access to books for a global audience.</li>
+			</ul>
+			<ul id="160621af-85b9-8033-84fb-e95676595b2a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Developers:</strong> Build innovative applications, tools, and
+					integrations that enhance the Booke platform and user experience.</li>
+			</ul>
+			<p id="160621af-85b9-803b-ad1a-fd1a1f0df859" class="">The interconnectedness of these participants,
+				incentivized by the BOOKE token, creates a dynamic and sustainable ecosystem that benefits everyone
+				involved. The Booke ecosystem empowers all participants by removing traditional gatekeepers and
+				promoting direct, transparent interaction and collaboration.</p>
+			<h2 id="160621af-85b9-8012-9265-e1323de8cf24" class="">V. Benefits and Value Propositions</h2>
+			<p id="160621af-85b9-806f-a737-fbfc1c299044" class="">Booke is designed to be a transformative platform that
+				offers significant benefits and value propositions to all stakeholders in the book industry. This
+				section details the specific advantages for authors, publishers, bookstores, readers, and POD providers.
+			</p>
+			<p id="160621af-85b9-80d8-b611-e73aa0bdb184" class=""><strong>A. For Authors</strong></p>
+			<p id="160621af-85b9-80e4-8e08-c0b405d5fce9" class="">Booke empowers authors with unprecedented control over
+				their work and their interactions with their readers. The key benefits include:</p>
+			<ul id="160621af-85b9-80d4-8b08-e52c5a55e326" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Increased Royalties:</strong> By eliminating intermediaries,
+					Booke allows authors to earn significantly higher royalties on each book sold, compared to
+					traditional publishing models.</li>
+			</ul>
+			<ul id="160621af-85b9-80ee-b873-df28f353b03a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Direct Connection with Readers:</strong> Booke provides authors
+					with direct access to their readers, enabling them to build a loyal community, receive feedback, and
+					engage in meaningful conversations.</li>
+			</ul>
+			<ul id="160621af-85b9-80fe-a465-cc64260971d2" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Control Over Content:</strong> Authors retain full control over
+					their content, including the ability to set their own prices, manage their rights, and update their
+					work as needed.</li>
+			</ul>
+			<ul id="160621af-85b9-80ed-8d70-e27ade621d57" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Expanded Reach:</strong> Booke provides authors with a global
+					platform to reach a wider audience, bypassing geographical limitations.</li>
+			</ul>
+			<ul id="160621af-85b9-8082-ab0b-f6fc65b1f722" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Monetization Opportunities:</strong> Beyond book sales, Booke
+					enables authors to monetize their expertise through office hours, live events, and premium content
+					offerings.</li>
+			</ul>
+			<ul id="160621af-85b9-80c0-b1a7-ca683699c4c8" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Data Ownership:</strong> Authors own the data generated from
+					their books, allowing them to gain valuable insights into reader behavior and preferences.</li>
+			</ul>
+			<ul id="160621af-85b9-8062-861b-eb476e0db6d0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Reduced Risk:</strong> Booke&#x27;s print-on-demand
+					capabilities and reduced barriers to entry allow authors to publish their books without significant
+					upfront investment, minimizing financial risk.</li>
+			</ul>
+			<p id="160621af-85b9-808c-88a0-d94a6b7f43f4" class=""><strong>B. For Publishers</strong></p>
+			<p id="160621af-85b9-80b5-b557-e8a448ee132b" class="">Booke offers publishers new tools and strategies to
+				thrive in a digital and decentralized landscape. The key benefits include:</p>
+			<ul id="160621af-85b9-803c-9ecf-ca540a0bf17a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Lower Costs:</strong> Booke significantly reduces costs
+					associated with traditional publishing, including printing, warehousing, distribution, and
+					marketing, by using the Internet Computer for direct on chain storage.</li>
+			</ul>
+			<ul id="160621af-85b9-80c6-9649-f348ab228c06" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Global Reach:</strong> Booke provides publishers with a global
+					distribution platform, expanding their reach beyond geographical limitations.</li>
+			</ul>
+			<ul id="160621af-85b9-8034-bc81-e6362dbe8470" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Direct Revenue Streams:</strong> Publishers can earn more from
+					each book sold by eliminating intermediaries and by selling directly through the platform.</li>
+			</ul>
+			<ul id="160621af-85b9-8015-b1be-e60c7969ebf9" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Streamlined Operations:</strong> Booke streamlines the entire
+					publishing process, from content creation to distribution, using automated tools and workflows.</li>
+			</ul>
+			<ul id="160621af-85b9-806c-ac30-cf8abeb4f10f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Enhanced Transparency:</strong> Publishers have full
+					transparency into sales data and revenue distribution, ensuring accountability and trust.</li>
+			</ul>
+			<ul id="160621af-85b9-8030-9f31-e6c06decdcd2" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Reduced Administrative Burden:</strong> The use of smart
+					contracts automates tasks like royalty payments and licensing, reducing the administrative burden
+					for publishers.</li>
+			</ul>
+			<ul id="160621af-85b9-803c-83d1-c09657fe3c8a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>New Business Models:</strong> Booke enables publishers to
+					experiment with new business models, including subscriptions, premium content offerings, and
+					community building strategies.</li>
+			</ul>
+			<p id="160621af-85b9-80ec-950f-c95b2b972d02" class=""><strong>C. For Bookstores</strong></p>
+			<p id="160621af-85b9-8090-87f8-c35e32e70d84" class="">Booke provides a much-needed boost to the
+				competitiveness of bookstores in the digital age. The key benefits include:</p>
+			<ul id="160621af-85b9-8072-9cf5-cad4619d690c" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Access to a Wide Selection of Titles:</strong> Bookstores can
+					access a global catalog of books, offering a broader range of titles than they could typically
+					stock.</li>
+			</ul>
+			<ul id="160621af-85b9-802e-aab9-f97e220489fa" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Competitive Pricing:</strong> The direct connection with
+					publishers enables bookstores to offer competitive pricing to their customers, thanks to POD and
+					lower operating costs.</li>
+			</ul>
+			<ul id="160621af-85b9-8025-83b2-c446ab353d4f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Local Community Engagement:</strong> Bookstores can leverage
+					Booke to organize local events, offer loyalty programs, and engage with their communities in new
+					ways.</li>
+			</ul>
+			<ul id="160621af-85b9-80c3-920e-fac1f77740dd" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Revenue Sharing:</strong> Bookstores that curate book
+					recommendations can earn a share of the revenue from each sale based on their curation, thus
+					creating a new revenue stream.</li>
+			</ul>
+			<ul id="160621af-85b9-80b0-a4c9-e53f77d8d21d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Streamlined Operations:</strong> Booke streamlines inventory
+					management and order fulfillment, reducing operational overhead.</li>
+			</ul>
+			<ul id="160621af-85b9-808a-9dca-f1d553abe47f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Direct Author Connection:</strong> Bookstores can facilitate
+					author events and interactions, fostering deeper connections between readers and writers.</li>
+			</ul>
+			<ul id="160621af-85b9-80b8-8693-df87d7586e08" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Sustainability:</strong> By participating in a decentralized
+					and transparent system, bookstores contribute to a more sustainable and equitable book industry.
+				</li>
+			</ul>
+			<p id="160621af-85b9-8047-ba90-d886c162f1b5" class=""><strong>D. For Readers</strong></p>
+			<p id="160621af-85b9-8086-b3db-ea7a76062c1a" class="">Booke offers readers a more engaging, affordable, and
+				personalized reading experience. The key benefits include:</p>
+			<ul id="160621af-85b9-80c1-83a1-d13a45f07ba6" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Lower Book Prices:</strong> By eliminating intermediaries,
+					Booke can offer books at lower prices, making literature more accessible to a broader audience.</li>
+			</ul>
+			<ul id="160621af-85b9-8071-b055-e9ea2714c4e7" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Wider Selection of Titles:</strong> Readers have access to a
+					vast catalog of books from authors all over the world, including diverse perspectives and niche
+					interests.</li>
+			</ul>
+			<ul id="160621af-85b9-808f-a86a-f9a04c727011" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Enhanced Learning Experience:</strong> The AI-powered
+					supplements enhance reader comprehension, knowledge retention, and provide opportunities for deeper
+					engagement.</li>
+			</ul>
+			<ul id="160621af-85b9-8081-8194-d8e850947517" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Seamless Reading Across Devices:</strong> Readers can
+					seamlessly switch between ebook and audiobook formats and continue where they left off.</li>
+			</ul>
+			<ul id="160621af-85b9-80dc-89ca-f22e2b2a0ac9" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Personalized Recommendations:</strong> Readers receive
+					personalized book recommendations based on their interests and reading history.</li>
+			</ul>
+			<ul id="160621af-85b9-8038-8cc1-c374ce6cc3cb" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Community Engagement:</strong> Readers can engage with authors,
+					join book clubs, and participate in the Booke community.</li>
+			</ul>
+			<ul id="160621af-85b9-80cf-bb19-d21173091d07" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Transparency and Security:</strong> Readers can be confident
+					that their transactions are secure and that they are purchasing authentic books.</li>
+			</ul>
+			<p id="160621af-85b9-8045-8f23-e14c58805a79" class=""><strong>E. For Print-on-Demand Providers</strong></p>
+			<p id="160621af-85b9-8032-891c-e4e15197de3b" class="">Booke offers POD providers a global network to expand
+				their business and increase their efficiency. The key benefits include:</p>
+			<ul id="160621af-85b9-80b4-938b-cd0a6b81e765" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Access to a Global Network:</strong> POD providers can access a
+					global network of print jobs, expanding their reach and increasing their capacity utilization.</li>
+			</ul>
+			<ul id="160621af-85b9-808c-b790-f8c6ebf2da28" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Automated Order Management:</strong> Smart contracts automate
+					the order fulfillment process, streamlining operations and reducing manual effort.</li>
+			</ul>
+			<ul id="160621af-85b9-80ad-921c-f6dd340772b5" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Transparent Transactions:</strong> POD providers are guaranteed
+					payment through secure and transparent transactions on the Internet Computer.</li>
+			</ul>
+			<ul id="160621af-85b9-8080-8e17-ed3775a346a7" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Reduced Operational Costs:</strong> POD providers can reduce
+					their operational costs by optimizing their printing schedules based on real-time demand.</li>
+			</ul>
+			<ul id="160621af-85b9-8080-b9f2-e457a54cef18" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Improved Visibility:</strong> Booke provides POD providers with
+					improved visibility, attracting new clients from all over the world.</li>
+			</ul>
+			<ul id="160621af-85b9-800d-8761-ddc214f4f340" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Competitive Advantage:</strong> By integrating with the Booke
+					platform, POD providers gain a competitive edge in the evolving publishing industry.</li>
+			</ul>
+			<p id="160621af-85b9-8095-8f78-e4df57da19fb" class="">In summary, Booke creates a synergistic ecosystem
+				where every stakeholder is empowered to achieve their goals and participate in a more equitable,
+				transparent, and sustainable book industry. By disrupting traditional models, Booke unlocks a world of
+				opportunity and transforms the way books are created, distributed, and consumed.</p>
+			<h2 id="160621af-85b9-808d-9b80-da84ddeb5b6b" class="">VI. Use Cases and Examples</h2>
+			<p id="161621af-85b9-80cf-b0a1-e33284f4e445" class="">Booke&#x27;s versatile platform can revolutionize the
+				book industry across diverse sectors and use cases. This section provides practical examples of how
+				Booke can be applied in various contexts.</p>
+			<p id="161621af-85b9-800f-9785-cb7aca217f0a" class=""><strong>A. Local Book Clubs and Communities</strong>
+			</p>
+			<p id="161621af-85b9-800a-a36c-fa0c17a5ae95" class="">Booke supports local bookstores and book clubs through
+				community engagement.</p>
+			<ul id="161621af-85b9-806f-be54-dae82d70cb8f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A local bookstore wants to create a book
+					club around a specific title, offering an enhanced experience for their community.</li>
+			</ul>
+			<ul id="161621af-85b9-80a5-ba0b-cee51e4229f6" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The bookstore can curate titles,
+					organize local and online events, and share revenue for each sale based on a reader&#x27;s location
+					or choice of bookstore. Smart contracts can provide access to the events and premium content within
+					the specific sNFT.</li>
+			</ul>
+			<ul id="161621af-85b9-8095-ab82-f480410c6e56" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Bookstores become not only places to buy
+					books but centers of literary culture that provide engaging experiences for their readers and help
+					build a loyal local readership.</li>
+			</ul>
+			<ul id="161621af-85b9-80f0-9326-e4d66f389ed5" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> A local bookstore organizes a monthly book
+					club around a specific Booke title, offering online sessions with the author or in-store
+					discussions, all seamlessly integrated through the platform.</li>
+			</ul>
+			<p id="161621af-85b9-8082-a21f-c8a4465fbc39" class=""><strong>B. Subscription and Premium Content</strong>
+			</p>
+			<p id="161621af-85b9-805c-9e6b-d5abe194c03c" class="">Booke enables innovative business models like
+				subscriptions and premium content access.</p>
+			<ul id="161621af-85b9-80d2-9287-d4a560164d70" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A publisher wants to offer subscribers
+					access to their back catalog and other premium content.</li>
+			</ul>
+			<ul id="161621af-85b9-80f7-8d87-eff5fb12937f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The publisher can create a
+					subscription service that provides access to all books that are part of the subscription or offer
+					premium access to additional content as part of an sNFT, building a loyal customer base.</li>
+			</ul>
+			<ul id="161621af-85b9-809e-b475-e51d8f911e24" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Readers gain access to a wider range of
+					content for a set price, and publishers generate recurring revenue streams and can offer more value
+					to their readers.</li>
+			</ul>
+			<p id="161621af-85b9-80db-97a3-c6d53d9f9526" class=""><strong>C. Self-Publishing</strong></p>
+			<p id="161621af-85b9-80e2-b73c-e5125acd93ec" class="">Booke empowers independent authors to publish their
+				work without relying on traditional gatekeepers.</p>
+			<ul id="161621af-85b9-8080-97af-e2060f13a17a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> An aspiring novelist completes their
+					manuscript and wants to reach a global audience.</li>
+			</ul>
+			<ul id="161621af-85b9-80f0-9b16-e7dbc1ee6ec0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The author can upload their manuscript
+					to Booke, create an sNFT, set their own price, and market their book directly to readers.</li>
+			</ul>
+			<ul id="161621af-85b9-8091-9983-eaf13642aa5d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> The author retains full control over their
+					work, earns higher royalties, builds a direct relationship with their readers, and bypasses the
+					lengthy and complex process of traditional publishing.</li>
+			</ul>
+			<ul id="161621af-85b9-8086-a8ac-da3519dea9ec" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> A self-published author creates a fantasy
+					novel on Booke, gaining a dedicated following and leveraging the platform to connect with fans,
+					distribute limited-edition content, and even organize virtual meet-and-greets.</li>
+			</ul>
+			<p id="161621af-85b9-804c-8428-c13fe199b5a1" class=""><strong>D. Niche and Specialized Content</strong></p>
+			<p id="161621af-85b9-809d-85e7-e9d0b7c6d6ca" class="">Booke caters to underserved markets with specialized
+				content.</p>
+			<ul id="161621af-85b9-80d2-8620-f456e252578a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A historian wants to publish a book on a
+					niche subject that may not be commercially viable for traditional publishers.</li>
+			</ul>
+			<ul id="161621af-85b9-8059-8211-fa3b5cbab71a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The historian can publish their book
+					on Booke, reaching a targeted audience of enthusiasts and enabling them to earn a living from their
+					expertise.</li>
+			</ul>
+			<ul id="161621af-85b9-80b4-9941-d79401a7d7fb" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Readers gain access to unique and
+					specialized content that they might not find elsewhere, and content creators can connect with their
+					niche audience without relying on large publishers.</li>
+			</ul>
+			<ul id="161621af-85b9-8074-8ebd-f9732ebb50d8" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> A historian publishes a book on a rare local
+					dialect, connecting with enthusiasts globally and generating revenue from a very specialized and
+					niche community.</li>
+			</ul>
+			<p id="161621af-85b9-8040-8624-f45d0f3b1f9d" class=""><strong>E. Educational Resources</strong></p>
+			<p id="161621af-85b9-8096-bbe6-f2de977a470a" class="">Booke enhances the delivery and accessibility of
+				educational materials.</p>
+			<ul id="161621af-85b9-80af-8917-f5bf1c4c615a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A professor wants to create interactive
+					learning materials for their students.</li>
+			</ul>
+			<ul id="161621af-85b9-8081-bdfb-cf7193e18b5e" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The professor can publish textbooks,
+					interactive exercises, and video lessons as sNFTs on Booke, providing students with a comprehensive
+					and engaging learning experience.</li>
+			</ul>
+			<ul id="161621af-85b9-80f3-aade-d1e66651e54f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Students gain access to affordable and
+					high-quality learning resources, and educators can easily update and manage their course materials.
+					The AI supplement provides a valuable tool for reinforcement and review.</li>
+			</ul>
+			<ul id="161621af-85b9-8025-988f-c2c280796d3a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> A university professor creates a
+					comprehensive textbook on physics, complete with quizzes and interactive simulations, making the
+					learning process more engaging and effective for their students.</li>
+			</ul>
+			<p id="161621af-85b9-8047-90f0-c189677c447d" class=""><strong>F. Academic Publishing</strong></p>
+			<p id="161621af-85b9-802b-ac96-e6bab8e3ed94" class="">Booke facilitates decentralized peer review and
+				distribution of research papers.</p>
+			<ul id="161621af-85b9-8016-bf16-daa60b26735d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A team of researchers wants to publish their
+					findings while retaining intellectual property and ensuring broad accessibility.</li>
+			</ul>
+			<ul id="161621af-85b9-8015-850b-f7c9e50a3ecf" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The researchers can publish their
+					papers as sNFTs on Booke, enabling transparent peer review, tracking of citations, and distribution
+					across a global network of academics.</li>
+			</ul>
+			<ul id="161621af-85b9-8043-9390-e4f077defbdb" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Authors retain ownership of their work,
+					receive recognition for their contributions, and the peer review process is more efficient and
+					transparent.</li>
+			</ul>
+			<ul id="161621af-85b9-80ff-be24-ce53203a78c9" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> A team of scientists publishes their research
+					paper on climate change, facilitating transparent peer review, garnering citations, and allowing
+					other researchers around the world to access and build upon their work, ultimately speeding up the
+					pace of scientific progress.</li>
+			</ul>
+			<p id="160621af-85b9-80e2-8ead-ef1763e936ca" class=""><strong>G. Interactive Storytelling &amp; Game
+					Books</strong></p>
+			<p id="160621af-85b9-80d4-b8ce-d2aa415a3003" class="">Booke&#x27;s sNFTs can revolutionize interactive
+				storytelling and game books.</p>
+			<ul id="160621af-85b9-809b-9fd0-e04c6e81034f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Scenario:</strong> A game developer wants to create an
+					interactive choose-your-own-adventure book with real consequences for choices.</li>
+			</ul>
+			<ul id="160621af-85b9-80b7-9930-f71ccd8109c2" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Booke Solution:</strong> The developer creates an sNFT that
+					stores the content and logic for an interactive game book, allowing readers to make choices, and
+					their decisions affect the narrative. Progress and achievements can even be tokenized and stored
+					within the sNFT itself.</li>
+			</ul>
+			<ul id="160621af-85b9-80be-aa05-cb0f33aa96ef" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Benefits:</strong> Readers get an immersive experience with
+					dynamic narratives. Authors and game developers can implement new forms of interaction, including
+					collaborative storytelling, and unlock new monetization opportunities.</li>
+			</ul>
+			<ul id="161621af-85b9-807c-9d8c-e8ca320b6712" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Example:</strong> An author creates a choose-your-own-adventure
+					mystery novel where reader choices affect the plot and can even be used to unlock new paths and
+					hidden content within the book.</li>
+			</ul>
+			<p id="160621af-85b9-80f3-913b-e0dfcad4ef20" class="">These use cases illustrate the versatility and
+				transformative potential of the Booke platform. By embracing decentralized technologies and innovative
+				solutions, Booke opens new doors for the creation, distribution, and consumption of literary works,
+				empowering all stakeholders in the book industry.</p>
+			<h2 id="160621af-85b9-80b3-af79-c7c7342d63ee" class="">VIII. Conclusion</h2>
+			<p id="160621af-85b9-809f-b9ad-c310abbd2b1a" class="">Booke represents a paradigm shift in the way books are
+				created, distributed, and consumed. It is a bold step toward a more equitable, transparent, and
+				sustainable future for the literary world. By harnessing the power of the Internet Computer and the
+				innovative ORIGYN sNFT standard, Booke transcends the limitations of traditional models, empowering all
+				stakeholders in the book industry.</p>
+			<p id="160621af-85b9-8093-8f99-e02aed4ad4a7" class="">Through the implementation of a decentralized
+				marketplace, Booke enables authors to connect directly with readers, control their content, and earn a
+				fair share of the revenue. Publishers gain access to a global platform that reduces costs, streamlines
+				operations, and fosters innovation. Bookstores transform into community hubs, curating experiences,
+				building relationships, and generating new revenue streams. Readers benefit from a more affordable,
+				engaging, and personalized reading experience, enhanced by AI-powered tools and direct connections with
+				authors and bookstores. Print-on-demand providers access a global network of print jobs, optimizing
+				their capacity and expanding their reach.</p>
+			<p id="160621af-85b9-80e6-8689-ded6752c8fd7" class="">The core of the Booke revolution lies in the sNFT, an
+				intelligent, self-contained object that encapsulates the book’s content, metadata, ownership, and
+				embedded smart contract logic. Booke’s sNFTs allow not just for immutable storage and secure access to
+				digital content but also for sophisticated features like AI-powered supplements, dynamic content, and
+				direct, peer-to-peer transactions. This goes far beyond the capabilities of traditional ebooks or paper
+				books and creates opportunities for enhanced engagement, learning, and community building.</p>
+			<p id="160621af-85b9-8094-9310-f6a1c2bf28af" class="">The DAO-governed structure of the Booke platform
+				ensures that the ecosystem remains transparent and community-driven. The BOOKE token acts as a catalyst
+				for participation, incentivizing contributions and ensuring that the community actively shapes the
+				future of the platform.</p>
+			<p id="160621af-85b9-80aa-8091-e7e43ef426bb" class="">Booke&#x27;s roadmap, structured around the three core
+				milestones – establishing the foundation with authors and readers, integrating bookstores as community
+				hubs, and expanding the ecosystem to include all market participants - outlines a clear path toward a
+				more accessible, innovative, and equitable literary ecosystem. From self-published novelists reaching
+				global audiences to universities delivering interactive learning materials, from niche authors finding
+				their dedicated communities to local bookstores offering engaging reading experiences, the use cases of
+				Booke are limitless.</p>
+			<p id="160621af-85b9-808a-aef8-cf2ae90e3d93" class="">This whitepaper has outlined the vision, architecture,
+				and technical details of the Booke platform. We believe that Booke has the power to not only disrupt the
+				current book industry but also to unlock unprecedented opportunities for creators, consumers, and the
+				literary world as a whole.</p>
+			<p id="160621af-85b9-8090-8609-e1b59d1ebb91" class="">We invite you to join the Booke community, participate
+				in the project, and contribute to the creation of a truly decentralized and transformative platform for
+				the future of books. Together, we can usher in a new era of literary accessibility, creativity, and
+				empowerment.</p>
+			<p id="160621af-85b9-8031-a254-cb3431787e0a" class="">By joining the Booke community, you are not just
+				investing in a platform, you are investing in a future where books can truly reach their full potential,
+				enriching lives and fostering a deeper understanding of the world around us. Let&#x27;s build this
+				future together, one Booke sNFT at a time.</p>
+			<h2 id="160621af-85b9-801c-a445-c65bac36030b" class="">IX. Appendix</h2>
+			<p id="160621af-85b9-80c3-a1e1-f101bf8e7151" class="">This appendix provides supplementary information and
+				technical details for the Booke platform.</p>
+			<p id="160621af-85b9-8008-a6b9-d71f44802311" class=""><strong>A. Technical Specifications</strong></p>
+			<ul id="160621af-85b9-809e-a650-e18351baebaf" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Blockchain:</strong> Internet Computer (IC)</li>
+			</ul>
+			<ul id="160621af-85b9-8011-a50b-ce4f7784e921" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>sNFT Standard:</strong> ORIGYN sNFT</li>
+			</ul>
+			<ul id="160621af-85b9-80a4-bf07-f76c286f7ad8" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Smart Contract Language:</strong> Motoko (Internet Computer
+					smart contract language)</li>
+			</ul>
+			<ul id="160621af-85b9-80f9-ad77-e3f3e76b9e1a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Content Storage:</strong> Internet Computer Canisters
+					(utilizing native IC storage)</li>
+			</ul>
+			<ul id="160621af-85b9-80f0-b53e-f6386101f12f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>API Standards:</strong> Candid RPC</li>
+			</ul>
+			<ul id="160621af-85b9-8071-b491-d8c7f46bf366" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>User Authentication:</strong> Internet Computer Decentralized
+					Identity (DID)</li>
+			</ul>
+			<ul id="160621af-85b9-8013-9d55-d34d43ec19d8" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Token Standard:</strong> ICRC-1</li>
+			</ul>
+			<ul id="160621af-85b9-8082-a981-e8f818feaab1" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Programming Languages:</strong> Typescript, JavaScript, HTML,
+					CSS, Motoko, Rust</li>
+			</ul>
+			<ul id="160621af-85b9-8020-92ee-ef361baf8e28" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Supported Content Formats:</strong>
+					<ul id="160621af-85b9-80b1-91fc-e2cb6475c711" class="bulleted-list">
+						<li style="list-style-type:circle">Print-Ready PDF (High-resolution, CMYK color profile)</li>
+					</ul>
+					<ul id="160621af-85b9-8000-be35-ecfc71a16aa6" class="bulleted-list">
+						<li style="list-style-type:circle">eBook (EPUB)</li>
+					</ul>
+					<ul id="160621af-85b9-80fa-ab7a-d485d458dc51" class="bulleted-list">
+						<li style="list-style-type:circle">Audiobook (MP3, AAC)</li>
+					</ul>
+					<ul id="160621af-85b9-8088-957c-e78146d15fb9" class="bulleted-list">
+						<li style="list-style-type:circle">AI Supplement (JSON, plain text, and other machine-readable
+							formats)</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-801e-9dfd-e20caf8518c7" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Supported Payment Gateways:</strong> 
+					<ul id="160621af-85b9-80b1-91fc-e2cb6475c711" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>ICP (Internet Computer Protocol)</strong> for direct on-chain payments. Canisters will manage conversion of ICP to cycles for internal computation costs</li>
+					</ul>
+					<ul id="160621af-85b9-8000-be35-ecfc71a16aa6" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Integration with Multiple Fiat Currency Gateways</strong> for ease of use and wider accessibility. This will enable the dynamic BOOKE (or ICP) pricing in fiat.</li>
+					</ul>
+					<ul id="160621af-85b9-80fa-ab7a-d485d458dc51" class="bulleted-list">
+						<li style="list-style-type:circle"><strong>Integration with other payment providers</strong> is also planned for increased flexibility.</li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="160621af-85b9-805f-9d5c-f73814a90d63" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Mobile Application Development:</strong> React Native
+					(cross-platform)</li>
+			</ul>
+			<ul id="160621af-85b9-803e-aaff-fa4cea0c6e7f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Data Security:</strong> Encryption at rest and in transit.
+					Regular security audits and penetration testing.</li>
+			</ul>
+			<p id="160621af-85b9-8084-850e-c0d20c61f936" class=""><strong>B. Team Information</strong></p>
+			<p>The accomplishment of the team behind the Booke platform was acknowledged by L'Atelier BNP Paribas as an
+				innovation and by Springwise as one of the most promising new business ideas. Booke is setting a new
+				standard for the future of books and reading.</p>
+			<p id="160621af-85b9-8048-a745-cce7e44f9ddc" class=""><strong>C. Tokenomics Details:</strong></p>
+			<ol type="1" id="160621af-85b9-80c9-b5f5-c55003f68336" class="numbered-list" start="1">
+				<li><strong>Token Name:</strong> BOOKE</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-8017-a0cf-dc3f1139f96b" class="numbered-list" start="2">
+				<li><strong>Token Symbol:</strong> BOOKE</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-800e-aff1-f60944553c2c" class="numbered-list" start="3">
+				<li><strong>Total Supply:</strong> Fixed supply of 1,000,000,000 BOOKE tokens.<ul
+						id="160621af-85b9-80d3-a8ea-c583a756e027" class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: A fixed supply ensures scarcity and provides a
+							predictable token ecosystem.</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-8006-b02f-ca22f63b3aba" class="numbered-list" start="4">
+				<li><strong>Token Allocation:</strong>
+					<ul id="160621af-85b9-80d8-921c-d0daa8e94fb5" class="bulleted-list">
+						<li style="list-style-type:disc">Community Treasury: 30% (300,000,000 BOOKE)<ul
+								id="160621af-85b9-808a-97c9-ee2d5ea9e8be" class="bulleted-list">
+								<li style="list-style-type:circle">Explanation: Funds for future developments, community
+									projects, and ecosystem expansion.</li>
+							</ul>
+						</li>
+					</ul>
+					<ul id="160621af-85b9-80c6-9d1d-e22cc528d423" class="bulleted-list">
+						<li style="list-style-type:disc">Early Adopters and Contributors: 20% (200,000,000 BOOKE)<ul
+								id="160621af-85b9-809f-9d0b-ec9531817860" class="bulleted-list">
+								<li style="list-style-type:circle">Explanation: Rewards for early supporters and
+									contributors to the platform. These tokens will be subjected to a vesting period of
+									24 months with a 6-month lockup.</li>
+							</ul>
+						</li>
+					</ul>
+					<ul id="160621af-85b9-805a-8941-eca12e6806e8" class="bulleted-list">
+						<li style="list-style-type:disc">Team and Advisors: 20% (200,000,000 BOOKE)<ul
+								id="160621af-85b9-80ec-b43e-e88a9a469f6c" class="bulleted-list">
+								<li style="list-style-type:circle">Explanation: Fair compensation and incentive for
+									platform developers, and those supporting the platform. These tokens will be
+									subjected to a vesting period of 36 months with a 12-month lockup.</li>
+							</ul>
+						</li>
+					</ul>
+					<ul id="160621af-85b9-80f9-9556-f8830bebf79f" class="bulleted-list">
+						<li style="list-style-type:disc">Ecosystem Development: 15% (150,000,000 BOOKE)<ul
+								id="160621af-85b9-80c1-b9c4-f7c4e5be42f6" class="bulleted-list">
+								<li style="list-style-type:circle">Explanation: Dedicated funds to promote partnerships,
+									integrations, and marketing efforts to expand platform utility.</li>
+							</ul>
+						</li>
+					</ul>
+					<ul id="160621af-85b9-80f5-a6d6-d5e87e188e55" class="bulleted-list">
+						<li style="list-style-type:disc">Staking Rewards: 15% (150,000,000 BOOKE)<ul
+								id="160621af-85b9-8086-ac60-c942444d88a7" class="bulleted-list">
+								<li style="list-style-type:circle">Explanation: Incentives for token holders to lock up
+									their tokens and contribute to network security.</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-807e-b5e1-ea958e7219fd" class="numbered-list" start="5">
+				<li><strong>Token Utility:</strong>
+					<ul id="160621af-85b9-80fe-ba94-e943dc5b5ccb" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Platform Currency (Secondary):</strong> BOOKE can be
+							used to purchase books, but with dynamic pricing adjusted to the current fiat value of the
+							token.</li>
+					</ul>
+					<ul id="160621af-85b9-8087-aa96-f855575297fd" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Governance Rights:</strong> BOOKE token holders can
+							vote on platform upgrades, policy changes, and treasury allocations through the DAO.</li>
+					</ul>
+					<ul id="160621af-85b9-804f-a36f-cc559766bb41" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Incentive Rewards:</strong> BOOKE tokens are earned by
+							authors for publishing new books, bookstores for curating content, and users for
+							participating in reviews, and community discussions.</li>
+					</ul>
+					<ul id="160621af-85b9-8063-9dd5-f6176ee7f362" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Access to Premium Features:</strong> Users can stake or
+							hold a certain amount of BOOKE to access premium features such as advanced AI tools or
+							author interaction opportunities.</li>
+					</ul>
+					<ul id="160621af-85b9-8011-8649-ccef458f879c" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Staking:</strong> Token holders can stake BOOKE to earn
+							additional tokens.</li>
+					</ul>
+					<ul id="160621af-85b9-80bd-851e-c277604bc997" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Community Grants:</strong> The DAO can vote to support
+							community projects.</li>
+					</ul>
+					<ul id="160621af-85b9-80ff-b66e-c02018ffabe6" class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: These utilities create a diverse demand and value
+							for the token beyond its role in purchases, encouraging users to hold and participate in the
+							ecosystem, while allowing the platform to offer a stable and predictable price in fiat
+							currency.</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80ae-a0c9-d7758c5b16b2" class="numbered-list" start="6">
+				<li><strong>Stablecoin Integration</strong>
+					<ul id="160621af-85b9-8046-8f94-c38b8b52c85d" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Stablecoin Name:</strong> BOOKUSD</li>
+					</ul>
+					<ul id="160621af-85b9-8070-95f5-e246eeb82c02" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Purpose:</strong> BOOKUSD will be a stablecoin pegged
+							to the US Dollar (1 BOOKUSD = $1). It will be used as the primary currency for purchasing
+							books on the platform.</li>
+					</ul>
+					<ul id="160621af-85b9-8070-990f-e1a5d8f16412" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Availability:</strong> Users can acquire BOOKUSD
+							through a direct on-ramp using various fiat payment methods, with details to be defined
+							during the platform&#x27;s development.</li>
+					</ul>
+					<ul id="160621af-85b9-800a-be42-c16475179f5c" class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: The stablecoin integration maintains price
+							stability for book purchases, which ensures the platform’s core mission of affordability for
+							readers, while allowing the platform to continue promoting the use of BOOKE for all its
+							other functionalities.</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80db-917d-e0fc443d5259" class="numbered-list" start="7">
+				<li><strong>Dynamic BOOKE Pricing:</strong>
+					<ul id="160621af-85b9-80cc-b89c-fa8cba7ece8a" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Mechanism:</strong> The price of books in BOOKE will
+							dynamically adjust based on an oracle that provides real-time BOOKE/USD exchange rates.</li>
+					</ul>
+					<ul id="160621af-85b9-80ba-8884-f695bd6e28be" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Purpose:</strong> To ensure that the fiat cost of books
+							remains stable and predictable, regardless of fluctuations in BOOKE&#x27;s market value.
+						</li>
+					</ul>
+					<ul id="160621af-85b9-804e-b11b-d32566fad5f3" class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: This dynamic pricing mechanism works together with
+							the stablecoin integration to ensure that the end cost of books is not influenced by the
+							price fluctuation of BOOKE, while maintaining a valuable and functional role for the BOOKE
+							token on the platform.</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80be-b630-f45dd2eb0fae" class="numbered-list" start="8">
+				<li><strong>Token Distribution Plan:</strong>
+					<ul id="160621af-85b9-80f1-996e-fa54d85e3996" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Early Adopters and Contributors:</strong> Tokens will
+							be distributed based on contributions and early involvement. These tokens will be subjected
+							to a vesting period of 24 months with a 6-month lockup period before any tokens can be
+							released.</li>
+					</ul>
+					<ul id="160621af-85b9-80c4-bea4-eef8ebe23cab" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Team and Advisors:</strong> Tokens are allocated to the
+							core development team and advisors, with a vesting schedule of 36 months and a 12-month
+							lockup period. This ensures long-term alignment of incentives and commitment.</li>
+					</ul>
+					<ul id="160621af-85b9-8053-8613-c9ab608e048a" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Community Treasury:</strong> Tokens will be locked for
+							a set period, with a gradual unlocking mechanism overseen by the DAO. This would allow for
+							the community to use these funds for various purposes as the ecosystem grows and matures.
+						</li>
+					</ul>
+					<ul id="160621af-85b9-8034-af23-e822c7b99748" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Ecosystem Development:</strong> These tokens will be
+							used to fund partnerships and integrations with various third-party platforms, and to
+							support marketing campaigns for the platform.</li>
+					</ul>
+					<ul id="160621af-85b9-8076-9315-f791d5b8163b" class="bulleted-list">
+						<li style="list-style-type:disc"><strong>Staking Rewards:</strong> These tokens will be
+							distributed to users staking their tokens within the ecosystem.</li>
+					</ul>
+					<ul id="160621af-85b9-80dc-88b3-d23d60eeab72" class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: A clear vesting and lockup period will ensure the
+							stability of the token at launch and prevent market manipulation by early investors or the
+							team.</li>
+					</ul>
+				</li>
+			</ol>
+			<ol type="1" id="160621af-85b9-80dd-88ef-ef7785c3a8cb" class="numbered-list" start="9">
+				<li><strong>Initial Token Price:</strong> To be determined.<ul id="160621af-85b9-8057-8a5a-ca0848d8bd46"
+						class="bulleted-list">
+						<li style="list-style-type:disc">Explanation: The initial token price will depend on various
+							factors, such as market conditions, overall valuation of the platform, and the demand at the
+							time of launch, and will be set accordingly prior to launch.</li>
+					</ul>
+				</li>
+			</ol>
+			<p id="160621af-85b9-80d1-809f-e9f3a5fba116" class=""><strong>D. Legal and Regulatory
+					Considerations</strong></p>
+			<ul id="161621af-85b9-8070-9eb1-d87f0ff3b90a" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Jurisdiction:</strong> The developer of the Booke platform is a
+					corporation registered in <strong>Delaware, US</strong>, and headquartered in <strong>Utah,
+						US</strong>. <em>This jurisdiction information is provided for transparency. It defines which
+						legal systems and regulations apply to the operation of the corporation developing the platform.
+						Further legal analysis is required before launch to ensure compliance with all relevant
+						regulations.</em></li>
+			</ul>
+			<ul id="161621af-85b9-8058-9805-cb0e5bef25d2" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Compliance:</strong>
+					<ul id="161621af-85b9-808e-9c3c-d0b168542b42" class="bulleted-list">
+						<li style="list-style-type:circle">Adherence to relevant data privacy regulations (GDPR, CCPA,
+							etc.): <em>This indicates our commitment to respecting user privacy and complying with
+								global privacy regulations. Specific details and policies will be implemented before the
+								launch of the platform.</em></li>
+					</ul>
+					<ul id="161621af-85b9-80bf-923f-ea2bfe75b543" class="bulleted-list">
+						<li style="list-style-type:circle">Compliance with intellectual property rights laws: <em>Booke
+								will operate in accordance with all applicable copyright and intellectual property laws.
+								Detailed procedures to protect the rights of authors and other content creators will be
+								put into place before launch.</em></li>
+					</ul>
+					<ul id="161621af-85b9-80da-901d-e555cfb03979" class="bulleted-list">
+						<li style="list-style-type:circle">Adherence to applicable securities laws within the United
+							States: <em>This indicates our commitment to complying with securities laws relevant to the
+								BOOKE token. The classification of the BOOKE token and associated requirements will be
+								fully assessed, and necessary compliance measures will be implemented before
+								launch.</em></li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="161621af-85b9-8070-8a05-e49392f03661" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Terms of Service:</strong> <em>A link to the Terms of Service
+						document will be provided here. This document will outline the terms and conditions for the use
+						of the Booke platform, including user rights, responsibilities, and dispute resolution
+						mechanisms. This document will be finalized and made available before launch.</em></li>
+			</ul>
+			<ul id="161621af-85b9-8075-8fd4-e28a890b5f8f" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Privacy Policy:</strong> <em>A link to the Privacy Policy
+						document will be provided here. This document will outline how we collect, use, and protect user
+						data in accordance with relevant privacy regulations. This policy will be finalized and made
+						available before launch.</em></li>
+			</ul>
+			<ul id="161621af-85b9-8099-b0b4-e18c3508cd14" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Disclaimer:</strong>
+					<ul id="161621af-85b9-80ed-9110-ebd2998e682f" class="bulleted-list">
+						<li style="list-style-type:circle"><em>A comprehensive disclaimer will be included here,
+								outlining the risks associated with using the Booke platform. This will be a standard
+								disclaimer related to the risks associated with blockchain projects, which will be
+								finalized with legal counsel before launch and will be provided here. This disclaimer
+								will ensure that users are informed about the risks associated with the technology and
+								the use of BOOKE tokens.</em></li>
+					</ul>
+					<ul id="161621af-85b9-8024-a626-e0648f38f28a" class="bulleted-list">
+						<li style="list-style-type:circle"><em>This disclaimer will clearly state that the Booke
+								platform utilizes blockchain technology and cryptocurrency (BOOKE) which involves risks,
+								that we do not guarantee profits or returns, that our white paper and platform are not
+								investment advice, and that the users have to perform their own due diligence. The users
+								will also acknowledge that the BOOKE token is subject to change and carries
+								technological risk.</em></li>
+					</ul>
+				</li>
+			</ul>
+			<p id="160621af-85b9-80fe-814b-e3dacc421596" class=""><strong>E. Glossary of Terms</strong></p>
+			<ul id="160621af-85b9-8083-8ca6-c4c6ff7a3bf0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>sNFT (Sovereign Non-Fungible Token):</strong> A unique digital
+					asset with embedded smart contract logic that can act as its own marketplace.</li>
+			</ul>
+			<ul id="160621af-85b9-8082-8cbb-c26614cd71af" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>DAO (Decentralized Autonomous Organization):</strong> A
+					community-governed organization that uses smart contracts for decision-making.</li>
+			</ul>
+			<ul id="160621af-85b9-8025-91bb-f1e0dd3e08b4" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>POD (Print-on-Demand):</strong> A printing process that allows
+					for printing books only when an order is received.</li>
+			</ul>
+			<ul id="160621af-85b9-8097-9b51-dae9793a6a45" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Internet Computer (IC):</strong> A layer-0 blockchain protocol
+					enabling smart contracts to run at web speed and scale.</li>
+			</ul>
+			<ul id="160621af-85b9-80a8-a152-f0f82db64dd0" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>ISBN (International Standard Book Number):</strong> A unique
+					numeric commercial book identifier.</li>
+			</ul>
+			<ul id="160621af-85b9-8092-a77b-c3c68513c446" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>EPUB:</strong> A widely used open standard for e-books.</li>
+			</ul>
+			<ul id="160621af-85b9-806b-8880-ffcfcd625e3d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Cycles:</strong> The fuel required to execute computations on
+					the Internet Computer</li>
+			</ul>
+			<ul id="160621af-85b9-806b-8880-ffcfcd625e3d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>ICP (Internet Computer Protocol):</strong>: ICP is the native token of the Internet Computer. It is the primary means of exchange and governance on the IC network. ICP is used to pay for the computational power to execute smart contract code.</li>
+			</ul>
+			<ul id="160621af-85b9-80b1-a043-d6b212e7f38d" class="bulleted-list">
+				<li style="list-style-type:disc"><strong>Motoko:</strong> The programming language of the Internet
+					Computer</li>
+			</ul>
+			<p id="160621af-85b9-809a-910d-d2bdee29e775" class=""><strong>F. References</strong></p>
+			<ul id="160621af-85b9-8010-b2b9-ecca10f086ad" class="bulleted-list">
+				<li style="list-style-type:disc"><a href="https://www.origyn.com/pdf/PerpetualOS.pdf">ORIGYN sNFT
+						Whitepaper</a></li>
+				<li style="list-style-type:disc"><a href="https://wiki.internetcomputer.org/wiki">Internet Computer
+						Wiki</a></li>
+			</ul>			
+		</div>
+	</article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+</body>
+
+</html>
